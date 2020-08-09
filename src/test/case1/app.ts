@@ -19,7 +19,7 @@ const routePaths = [
   '/routes/router02'
 ];
 
-const hotMiddle = hotReload(`${__dirname}/../`, true);
+const hotMiddle = hotReload(`${__dirname}`, true);
 
 for (const item of routePaths) {
   const routePath = `${__dirname}${item}`;

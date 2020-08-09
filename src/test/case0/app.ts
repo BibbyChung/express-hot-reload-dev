@@ -13,17 +13,11 @@ const routePaths = [
   '/routes/router01'
 ];
 
-const hotMiddle = hotReload(`${__dirname}/../`, true);
+const hotMiddle = hotReload(`${__dirname}`, true);
 
 for (const item of routePaths) {
   const routePath = `${__dirname}${item}`;
-  if (hotReload) {
-    app.use(hotMiddle(routePath));
-  } else {
-    const type = require(routePath);
-    const t: BaseRouter = new type(app);
-    t.init();
-  }
+  app.use(hotMiddle(routePath));
 }
 
 const server = app.listen(3000, () => {

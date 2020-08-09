@@ -1,9 +1,12 @@
-import dd from 'debug';
+import debug from 'debug';
 import chokidar from 'chokidar';
-import path from 'path';
-import fs from 'fs';
+import { join, sep, dirname } from 'path';
+import { readdirSync, existsSync, lstatSync } from 'fs';
 
-const debug = dd('express-hot-reload');
+const myDebug = debug('express-hot-reload');
+const blockFolderNames = [
+  'node_modules'
+];
 
 declare global {
   interface String {
@@ -12,47 +15,42 @@ declare global {
 }
 String.prototype.toFolder = function () {
   const that = this.toString();
-  return path.join(that, '/');
+  return join(that, '/');
 }
+
+const getDirectories = source =>
+  readdirSync(source, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
 
 export const hotReload = (watchFolder, isDebug = false) => {
 
-  debug.enabled = isDebug;
+  myDebug.enabled = isDebug;
 
-  const reWin = new RegExp('\\' + path.sep, 'g');
+  const reWin = new RegExp('\\' + sep, 'g');
   let wPath = watchFolder;
 
-  const isFolderDirExisted = fs.existsSync(wPath) && fs.lstatSync(wPath).isDirectory();
+  const isFolderDirExisted = existsSync(wPath) && lstatSync(wPath).isDirectory();
   if (isFolderDirExisted) {
     wPath = wPath.replace(reWin, '/').toFolder();
   } else {
-    wPath = path.dirname(wPath).replace(reWin, '/').toFolder();
+    wPath = dirname(wPath).replace(reWin, '/').toFolder();
+  }
+  myDebug('watch folder', wPath);
+
+  const notAllow = getDirectories(wPath).some(n => blockFolderNames.indexOf(n) === 0);
+  if (notAllow) {
+    throw new Error(`please dont include "${blockFolderNames.join(', ')}" folders`);
   }
 
-  // ignoreFolders = ignoreFolders.map(a => a.replace(reWin, '/').toFolder());
-
-  debug('watch folder', wPath);
-  // debug('ignore folder', ignoreFolders);
-  // const watcher = chokidar.watch(wPath, {
-  //   ignored: (p => {
-  //     const isIgnored = ignoreFolders.some(ig => p.indexOf(ig) === 0);
-  //     if (isIgnored) {
-  //       // debug('ignore folder', p)
-  //       return true;
-  //     }
-  //     return false;
-  //   }),
-  //   persistent: true
-  // });
   const watcher = chokidar.watch(wPath);
-  const re = new RegExp(wPath);
-  watcher.on('ready', function () {
-    watcher.on('all', function () {
+  watcher.on('ready', () => {
+    watcher.on('all', () => {
       Object.keys(require.cache)
-        .forEach(function (id) {
+        .forEach((id) => {
           const cId = id.replace(reWin, '/');
           if (cId.indexOf(wPath) === 0) {
-            debug('=> deleting cache key', id.replace(reWin, '/'));
+            myDebug('=> deleting cache key', id.replace(reWin, '/'));
             delete require.cache[id];
           }
         })
@@ -62,7 +60,7 @@ export const hotReload = (watchFolder, isDebug = false) => {
   return (routerPath) => {
     require(routerPath);
     return (req, res, next) => {
-      debug('require hot reload');
+      myDebug('require hot reload');
       require(routerPath)(req, res, next);
     }
   }

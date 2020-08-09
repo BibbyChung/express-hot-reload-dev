@@ -4,7 +4,7 @@ import { TestHelper } from "../testHelper";
 
 const dir = __dirname;
 
-describe('*** running complicated test ***', () => {
+describe('*** running graphql test ***', () => {
 
   let sandbox: SinonSandbox;
   let assert: SinonAssert;
