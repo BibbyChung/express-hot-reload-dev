@@ -51,6 +51,6 @@ npm run test
 - https://github.com/kevinsimper/express-reload
 
 
-## Other Issues
+## other issues
 
 - https://zhuanlan.zhihu.com/p/34702356
