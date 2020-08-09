@@ -1,6 +1,8 @@
 language: node_js
 services:
   - docker
+install:
+  - echo "ignore npm install"
 before_script:
   - docker pull node:12.14-alpine
 script: 
