@@ -1,5 +1,4 @@
 import { json, urlencoded } from 'body-parser';
-import { BaseRouter } from "./routes/baseRouter";
 import exp from 'express';
 import { hotReload } from '../../index';
 
@@ -13,11 +12,11 @@ const routePaths = [
   '/routes/router01'
 ];
 
-const hotMiddle = hotReload(`${__dirname}`, true);
+const hotReloadMiddle = hotReload(`${__dirname}`, true);
 
 for (const item of routePaths) {
   const routePath = `${__dirname}${item}`;
-  app.use(hotMiddle(routePath));
+  app.use(hotReloadMiddle(routePath));
 }
 
 const server = app.listen(3000, () => {

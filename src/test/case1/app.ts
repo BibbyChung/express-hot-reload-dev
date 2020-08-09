@@ -19,12 +19,12 @@ const routePaths = [
   '/routes/router02'
 ];
 
-const hotMiddle = hotReload(`${__dirname}`, true);
+const hotReloadMiddle = hotReload(`${__dirname}`, true);
 
 for (const item of routePaths) {
   const routePath = `${__dirname}${item}`;
   if (hotReload) {
-    app.use(hotMiddle(routePath));
+    app.use(hotReloadMiddle(routePath));
   } else {
     const type = require(routePath);
     const t: BaseRouter = new type(app);
