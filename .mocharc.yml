@@ -1,0 +1,7 @@
+spec: 
+  - 'dist/**/*.spec.js'
+watch: false
+  
+  # mocha --require ts-node/register --extensions ts,tsx --watch --watch-files src 'tests/**/*.{ts,tsx}'
+  
+  
