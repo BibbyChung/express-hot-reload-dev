@@ -8,7 +8,7 @@ const debug_1 = __importDefault(require("debug"));
 const chokidar_1 = __importDefault(require("chokidar"));
 const path_1 = require("path");
 const fs_1 = require("fs");
-const myDebug = debug_1.default('express-hot-reload');
+const myDebug = debug_1.default('express-hot-reload-dev');
 const blockFolderNames = [
     'node_modules'
 ];

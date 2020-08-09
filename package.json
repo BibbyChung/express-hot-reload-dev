@@ -1,9 +1,9 @@
 {
-  "name": "express-hot-reload",
+  "name": "express-hot-reload-dev",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/BibbyChung/express-hot-reload.git",
+  "repository": "https://github.com/BibbyChung/express-hot-reload-dev.git",
   "author": "Bibby Chung",
   "license": "MIT",
   "scripts": {

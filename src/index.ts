@@ -3,7 +3,7 @@ import chokidar from 'chokidar';
 import { join, sep, dirname } from 'path';
 import { readdirSync, existsSync, lstatSync } from 'fs';
 
-const myDebug = debug('express-hot-reload');
+const myDebug = debug('express-hot-reload-dev');
 const blockFolderNames = [
   'node_modules'
 ];

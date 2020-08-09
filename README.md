@@ -1,15 +1,15 @@
-# express-hot-reload [![Build Status](https://travis-ci.org/BibbyChung/express-hot-reload.svg?branch=master)](https://travis-ci.org/BibbyChung/express-hot-reload) [![npm](https://img.shields.io/npm/v/express-hot-reload.svg)](https://github.com/BibbyChung/express-hot-reload)
+# express-hot-reload-dev [![Build Status](https://travis-ci.org/BibbyChung/express-hot-reload-dev.svg?branch=master)](https://travis-ci.org/BibbyChung/express-hot-reload-dev) [![npm](https://img.shields.io/npm/v/express-hot-reload-dev.svg)](https://github.com/BibbyChung/express-hot-reload-dev)
 
 hot reload for express
 
 ## how to use
 
-[demo 0](https://github.com/BibbyChung/express-hot-reload/tree/master/src/test/case0) |
-[demo 1](https://github.com/BibbyChung/express-hot-reload/tree/master/src/test/case1)
+[demo 0](https://github.com/BibbyChung/express-hot-reload-dev/tree/master/src/test/case0) |
+[demo 1](https://github.com/BibbyChung/express-hot-reload-dev/tree/master/src/test/case1)
 
 ```js
 import exp from 'express';
-import { hotReload } from 'express-hot-reload';
+import { hotReload } from 'express-hot-reload-dev';
 
 const app = exp();
 
