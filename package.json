@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "npm run build && mocha --exit",
+    "cov": "npm run build && nyc mocha --exit",
     "start:case0": "npm run build && node ./dist/case0/index.js",
     "mocha:help": "mocha --help",
     "build": "tsc -p ./tsconfig.json"
@@ -31,6 +32,7 @@
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "mocha": "^8.1.1",
+    "nyc": "^15.1.0",
     "polka": "^0.5.2",
     "sinon": "^9.0.2",
     "supertest": "^4.0.2",
