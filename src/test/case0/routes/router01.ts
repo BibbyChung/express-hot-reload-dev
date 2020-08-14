@@ -1,6 +1,7 @@
 import { BaseRouter, exportAdapter } from './baseRouter';
 import { userData } from '../services/user.service';
 import { IncomingMessage, ServerResponse } from 'http';
+import { CacheHelper } from '../common/cacheHelper';
 
 const baseUrl = '/api';
 
@@ -13,7 +14,8 @@ class Router01 extends BaseRouter {
 
   init() {
 
-    this.get(`/user`, async (req: IncomingMessage, res: ServerResponse) => await this.getUser(req, res));
+    this.get(`/user`, async (req: IncomingMessage, res: ServerResponse) =>  this.getUser(req, res));
+    this.get(`/cache`, async (req: IncomingMessage, res: ServerResponse) => this.getCache(req, res));
 
   }
 
@@ -25,6 +27,16 @@ class Router01 extends BaseRouter {
     });
 
   }
+
+  private async getCache(req: IncomingMessage, res: ServerResponse) {
+
+    const t = await CacheHelper.get('ttt') || 'abc';
+    this.send(res, 200, {
+      t
+    });
+
+  }
+
 }
 
 export = exportAdapter(Router01);

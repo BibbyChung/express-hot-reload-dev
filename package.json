@@ -9,9 +9,11 @@
   "scripts": {
     "test": "npm run build && mocha --exit",
     "cov": "npm run build && nyc mocha --exit",
-    "start:case0": "npm run build && node ./dist/case0/index.js",
+    "upgrade-interactive": "npx npm-check --update",
+    "start:case0": "npm run build && node ./dist/test/case0/app.js",
     "mocha:help": "mocha --help",
-    "build": "tsc -p ./tsconfig.json"
+    "build": "tsc -p ./tsconfig.json",
+    "build:watch": "tsc -p ./tsconfig.json -w & node ./dist/test/case0/app.js"
   },
   "keywords": [
     "commonjs-hot-reload",
@@ -23,7 +25,7 @@
     "debug": "^4.1.1"
   },
   "devDependencies": {
-    "@types/mocha": "^8.0.0",
+    "@types/mocha": "^8.0.2",
     "@types/node": "^14.0.27",
     "@types/sinon": "^9.0.4",
     "@types/supertest": "^2.0.10",
@@ -34,7 +36,7 @@
     "mocha": "^8.1.1",
     "nyc": "^15.1.0",
     "polka": "^0.5.2",
-    "sinon": "^9.0.2",
+    "sinon": "^9.0.3",
     "supertest": "^4.0.2",
     "typescript": "3.9.7"
   }

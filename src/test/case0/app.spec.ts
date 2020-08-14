@@ -75,4 +75,18 @@ describe('*** running api test ***', () => {
 
   });
 
+  it('test "/api/cache"', (done) => {
+
+    const url = '/api/cache';
+
+    ss.get(url).expect(200)
+      .expect(res => {
+        const obj: { t: string } = res.body;
+        console.log(obj);
+        assert.match(obj.t, 'abc');
+      })
+      .then(() => done());
+
+  });
+
 });
